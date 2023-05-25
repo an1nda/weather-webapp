@@ -29,53 +29,12 @@ code {
   }
 }
 
-@keyframes slideOut {
-  from {
-    transform: translateX(0);
-  } to {
-    transform: translateX(-100%);
-  }
+@keyframes identifier {
+  
 }
 
 .container {
   animation: zoomIn 1s ease-in-out;
-  opacity: 0;
+  opacity: 1;
   position: relative;
-}
-
-.container-loaded {
-  opacity: 1;
-  transition: opacity 0.2s ease-in-out;
-}
-
-.message {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: slideOut 1s ease-in-out 3s forwards;
-  opacity: 0;
-}
-
-.message-loaded {
-  opacity: 1;
-  transition: opacity 0.2s ease-in-out;
-}
-
-.spinner {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 1;
-  animation: slideOut 1s ease-in-out 3s forwards;
-}
-
-.spinner.loaded {
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
 }
