@@ -8,6 +8,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.box {
+  position: relative;
+  text-align: center;
+  margin: 50px;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -37,4 +43,9 @@ code {
   animation: zoomIn 1s ease-in-out;
   opacity: 1;
   position: relative;
+}
+
+.msg {
+  position: relative;
+
 }

@@ -13,15 +13,15 @@ const api = {
 }
 const headwear = ['a baseball cap', 'sunglasses',
                   'a bucket hat', 'a beanie', 'earmuffs',
-                  'a hood', 'toque']
-const outerwear = ['a vest,', 'a hoodie,', 'a windbreaker,',
-                  'a bubble jacket,', 'a winter jacket,']
-const top = ['a tank top,' ,'a t-shirt,', 'a polo shirt,',
-             'a sweater,', 'a long sleeve shirt,']
-const bot = ['shorts,', 'cargo pants,', 'sweatpants,',
-              'khakis,', 'thick sweatpants,', 'jeans,']
+                  'a hood', 'a toque']
+const outerwear = ['an overshirt, ','a vest, ', 'a hoodie, ', 'a windbreaker, ',
+                  'a bubble jacket, ', 'a winter jacket, ']
+const top = ['a tank top, ', 'a polo shirt, ','a t-shirt, ', 
+             'a sweater, ', 'a long sleeve shirt, ']
+const bot = ['shorts, ', 'cargo pants, ',
+              'khakis, ', 'sweatpants, ', 'jeans, ']
 const feet = ['and flip flops.', 'and sandals.', 'and runners.', 
-              'and sneakers.','and rain boots.', 'and snow boots.']
+              'and sneakers.', 'and boots.']
 
 const starter = ["You should wear ",
                 "A perfect outfit for today would be ",
@@ -79,11 +79,11 @@ function App() {
         )
       } else {
         if(condition === 3 || condition === 5){ //Rainy
-          checkTemp(temp)
+          return `${checkTemp(temp)} Consider bringing an umbrella!`
         } else if (condition === 6) { //Snowy
-          checkTemp(temp)
+          return `${checkTemp(temp)} Watch out for snowfall!`
         } else { // Any other condition
-          checkTemp(temp)
+          return checkTemp(temp)
         }
       }
     }
@@ -92,23 +92,60 @@ function App() {
   };
 
   const checkTemp = (temp) => {
-    if(temp > 15){
+    if(temp > 17){
       return (
-        <span>{`${starter[Math.floor(Math.random(0, starter.length))] +
-              top[[Math.floor(Math.random(0,2))]] + 
-              bot[[Math.floor(Math.random(0,3))]] +
-              feet[[Math.floor(Math.random(0,4))]]}
-              Add in ${headwear[Math.floor(Math.random(0,3))]} 
-              and you are set!`}</span>
+        <span className='msg'>{`${starter[Math.floor(Math.random(0, starter.length))] +
+          top[[Math.floor(Math.random() * 3)]] + 
+          bot[[Math.floor(Math.random() * 4)]] +
+          feet[[Math.floor(Math.random() * 5)]]}
+          Add in ${headwear[Math.floor(Math.random() * 4)]} 
+          and you are set!`}
+        </span>
       )
     } else if(temp > 7) {
-      
+      return (
+        <span className='msg'>{`${starter[Math.floor(Math.random() * starter.length)] +
+          outerwear[[Math.floor(Math.random() * 3)]] + 
+          top[[Math.floor(Math.random() * 2) + 1]] + 
+          bot[[Math.floor(Math.random() * 4) + 1]] +
+          feet[[Math.floor(Math.random() * 2) + 2]]}
+          Put on ${headwear[Math.floor(Math.random() * 4) + 3]} 
+          and you are set!`}
+        </span>
+      )
     } else if (temp > -7) {
-      
+      return (
+        <span className='msg'>{`${starter[Math.floor(Math.random() * starter.length)] +
+          outerwear[[Math.floor(Math.random() * 3) + 3]] + 
+          top[[Math.floor(Math.random() * 3) + 2]] + 
+          bot[[Math.floor(Math.random() * 4) + 1]] +
+          feet[[Math.floor(Math.random() * 3) + 2]]}
+          Put on ${headwear[Math.floor(Math.random() * 4) + 3]} 
+          and you are set!`}
+        </span>
+      )
     } else if (temp > -10){
-      
+      return (
+        <span className='msg'>{`${starter[Math.floor(Math.random() * starter.length)] +
+          outerwear[[Math.floor(Math.random() * 2) + 4]] + 
+          top[[Math.floor(Math.random() * 2) + 3]] + 
+          bot[[Math.floor(Math.random() * 3) + 2]] +
+          feet[[Math.floor(Math.random() * 3) + 2]]}
+          Put on ${headwear[Math.floor(Math.random() * 4) + 3]} 
+          and you are set!`}
+        </span>
+      )
     } else {
-      
+      return (
+        <span className='msg'>{`${starter[Math.floor(Math.random() * starter.length)] +
+          outerwear[[Math.floor(Math.random() * 2) + 4]] + 
+          top[[Math.floor(Math.random() * 2) + 3]] + 
+          bot[[Math.floor(Math.random() * 2) + 3]] +
+          feet[[4]]}
+          Put on ${headwear[Math.floor(Math.random() * 4) + 3]} 
+          and you are set!`}
+        </span>
+      )
     }
   }
   
@@ -123,7 +160,9 @@ function App() {
                 <h5>Currently in {weatherData.name}, the temperature is</h5>
                 <h3>{Math.round(weatherData.main.temp - 273.15)} °C.</h3>
                 <h5>It's looking like {weatherData.weather[0].description}!</h5>
-
+                <div className='box'>
+                  <p>{getTemperatureResponse()}</p>
+                </div>
               </div>
             ) : (
               <BarLoader className='loader' color="#010101" loading={true} />
