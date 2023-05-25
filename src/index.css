@@ -1,4 +1,5 @@
 body {
+  
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -10,4 +11,71 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.loader {
+  display: block;
+  margin: 0 auto;
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+  } to {
+    transform: translateX(-100%);
+  }
+}
+
+.container {
+  animation: zoomIn 1s ease-in-out;
+  opacity: 0;
+  position: relative;
+}
+
+.container-loaded {
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.message {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: slideOut 1s ease-in-out 3s forwards;
+  opacity: 0;
+}
+
+.message-loaded {
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 1;
+  animation: slideOut 1s ease-in-out 3s forwards;
+}
+
+.spinner.loaded {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
 }
