@@ -58,8 +58,21 @@ body {
   }
 }
 
-.temp-msg.show {
-  animation: rollUpText 0.7s ease-in;
+.temp-msg {
+  animation: rollUpText 0.7s ease-out;
+}
+
+@keyframes rollUpText {
+  0%{
+    transform: translateY(500%);
+    transform: rotateX(-90deg);
+    transform: rotateY(-90deg);
+  }
+  100% {
+    transform: translateY(0);
+    transform: rotateX(0deg);
+    transform: rotateY(0deg);
+  }
 }
 
 @keyframes tilting {

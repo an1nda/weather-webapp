@@ -6,6 +6,7 @@ import './index.css';
 import axios from "axios";
 import { usePromiseTracker } from "react-promise-tracker";
 import { trackPromise } from 'react-promise-tracker';
+import autoAnimate from '@formkit/auto-animate'
 
 const api = {
   key: `1422ec8bf755c0a280635dbafe8e1d81`,
@@ -42,7 +43,10 @@ function App() {
 
         const weather = await fetchWeather(pos.coords.latitude, pos.coords.longitude)
         
-        setWeatherData(weather)
+        setTimeout(() => {
+          setWeatherData(weather)
+        }, 3000)
+        
       } catch (error) {
         console.error("Error fetching weather data:", error)
       }
@@ -152,9 +156,7 @@ function App() {
   const [showMessage, setShowMessage] = useState(false);
 
   const handleClick = () => {
-    setTimeout(() => {
-      setShowMessage(true);
-    }, 500)
+    setShowMessage(true);
       
   };
   
