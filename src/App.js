@@ -98,7 +98,7 @@ function App() {
           top[[Math.floor(Math.random() * 3)]] + 
           bot[[Math.floor(Math.random() * 4)]] +
           feet[[Math.floor(Math.random() * 5)]]}
-          Add in ${headwear[Math.floor(Math.random() * 4)]} 
+          Add in ${headwear[Math.floor(Math.random() * 3)]} 
           and you are set!`}
         </span>
       )
@@ -148,24 +148,42 @@ function App() {
       )
     }
   }
+
+  const [showMessage, setShowMessage] = useState(false);
+
+  const handleClick = () => {
+    setTimeout(() => {
+      setShowMessage(true);
+    }, 500)
+      
+  };
   
   return (
     <div className="App">
       <header className="App-header">
         <div className='container'>
-          <h1 className='title'>How's it looking outside?</h1>
           <div>
             {weatherData ? (
-              <div>
-                <h5>Currently in {weatherData.name}, the temperature is</h5>
-                <h3>{Math.round(weatherData.main.temp - 273.15)} °C.</h3>
-                <h5>It's looking like {weatherData.weather[0].description}!</h5>
+              <div className='inner-box'>
+                <p>Currently in {weatherData.name}, the temperature is</p>
+                <h2>{Math.round(weatherData.main.temp - 273.15)} °C.</h2>
+                <p>It's looking like {weatherData.weather[0].description}!</p>
                 <div className='box'>
-                  <p>{getTemperatureResponse()}</p>
+                {!showMessage ? (
+                  <button className='nice-btn' onClick={handleClick}>
+                    What should I wear?
+                  </button>
+                ) : (
+                  <p className='temp-msg'>{getTemperatureResponse()}</p>
+                )}
+                  
                 </div>
               </div>
             ) : (
-              <BarLoader className='loader' color="#010101" loading={true} />
+              <div>
+                <h1 className='title'>How's it looking outside?</h1>
+                <BarLoader className='loader' color="#010101" loading={true} />
+              </div>
             )}
           </div>
         </div>
