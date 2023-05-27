@@ -98,7 +98,7 @@ function App() {
   const checkTemp = (temp) => {
     if(temp > 17){
       return (
-        <span className='msg'>{`${starter[Math.floor(Math.random(0, starter.length))] +
+        <span className='msg'>{`${starter[Math.floor(Math.random(0) * starter.length)] +
           top[[Math.floor(Math.random() * 3)]] + 
           bot[[Math.floor(Math.random() * 4)]] +
           feet[[Math.floor(Math.random() * 5)]]}
