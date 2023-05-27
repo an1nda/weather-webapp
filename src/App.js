@@ -6,6 +6,7 @@ import './index.css';
 import axios from "axios";
 import { usePromiseTracker } from "react-promise-tracker";
 import { trackPromise } from 'react-promise-tracker';
+import autoAnimate from '@formkit/auto-animate'
 
 const api = {
   key: `1422ec8bf755c0a280635dbafe8e1d81`,
@@ -42,7 +43,10 @@ function App() {
 
         const weather = await fetchWeather(pos.coords.latitude, pos.coords.longitude)
         
-        setWeatherData(weather)
+        setTimeout(() => {
+          setWeatherData(weather)
+        }, 3000)
+        
       } catch (error) {
         console.error("Error fetching weather data:", error)
       }
@@ -94,11 +98,11 @@ function App() {
   const checkTemp = (temp) => {
     if(temp > 17){
       return (
-        <span className='msg'>{`${starter[Math.floor(Math.random(0, starter.length))] +
+        <span className='msg'>{`${starter[Math.floor(Math.random(0) * starter.length)] +
           top[[Math.floor(Math.random() * 3)]] + 
           bot[[Math.floor(Math.random() * 4)]] +
           feet[[Math.floor(Math.random() * 5)]]}
-          Add in ${headwear[Math.floor(Math.random() * 4)]} 
+          Add in ${headwear[Math.floor(Math.random() * 3)]} 
           and you are set!`}
         </span>
       )
@@ -124,7 +128,7 @@ function App() {
           and you are set!`}
         </span>
       )
-    } else if (temp > -10){
+    } else if (temp > -14){
       return (
         <span className='msg'>{`${starter[Math.floor(Math.random() * starter.length)] +
           outerwear[[Math.floor(Math.random() * 2) + 4]] + 
@@ -148,24 +152,40 @@ function App() {
       )
     }
   }
+
+  const [showMessage, setShowMessage] = useState(false);
+
+  const handleClick = () => {
+    setShowMessage(true);
+      
+  };
   
   return (
     <div className="App">
       <header className="App-header">
         <div className='container'>
-          <h1 className='title'>How's it looking outside?</h1>
           <div>
             {weatherData ? (
-              <div>
-                <h5>Currently in {weatherData.name}, the temperature is</h5>
-                <h3>{Math.round(weatherData.main.temp - 273.15)} °C.</h3>
-                <h5>It's looking like {weatherData.weather[0].description}!</h5>
+              <div className='inner-box'>
+                <p>Currently in {weatherData.name}, the temperature is</p>
+                <h2>{Math.round(weatherData.main.temp - 273.15)} °C.</h2>
+                <p>It's looking like {weatherData.weather[0].description}!</p>
                 <div className='box'>
-                  <p>{getTemperatureResponse()}</p>
+                {!showMessage ? (
+                  <button className='nice-btn' onClick={handleClick}>
+                    What should I wear?
+                  </button>
+                ) : (
+                  <p className='temp-msg'>{getTemperatureResponse()}</p>
+                )}
+                  
                 </div>
               </div>
             ) : (
-              <BarLoader className='loader' color="#010101" loading={true} />
+              <div>
+                <h1 className='title'>How's it looking outside?</h1>
+                <BarLoader className='loader' color="#010101" loading={true} />
+              </div>
             )}
           </div>
         </div>
