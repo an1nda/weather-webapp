@@ -128,7 +128,7 @@ function App() {
           and you are set!`}
         </span>
       )
-    } else if (temp > -10){
+    } else if (temp > -14){
       return (
         <span className='msg'>{`${starter[Math.floor(Math.random() * starter.length)] +
           outerwear[[Math.floor(Math.random() * 2) + 4]] + 
