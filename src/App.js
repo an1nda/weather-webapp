@@ -3,10 +3,6 @@ import './App.css';
 import React, { useEffect, useState } from "react";
 import { BarLoader } from 'react-spinners';
 import './index.css';
-import axios from "axios";
-import { usePromiseTracker } from "react-promise-tracker";
-import { trackPromise } from 'react-promise-tracker';
-import autoAnimate from '@formkit/auto-animate'
 
 const api = {
   key: `1422ec8bf755c0a280635dbafe8e1d81`,
